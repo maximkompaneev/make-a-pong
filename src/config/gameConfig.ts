@@ -10,7 +10,7 @@ const gameConfig = {
   },
   ball: {
     radius: 10,
-    speed: 2 * 60,
+    speed: 4 * 60,
   },
   score: {
     left: 0,
