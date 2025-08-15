@@ -43,7 +43,6 @@ export default function GameCanvas() {
     });
   };
 
-  // Initialize on mount
   useEffect(() => {
     initGame();
   }, []);
@@ -51,15 +50,12 @@ export default function GameCanvas() {
   const { movePaddles } = usePaddleControls(leftPaddleRef, rightPaddleRef);
 
   const handleReset = () => {
-  // Reset scores in store
   const settings = getSettings();
   update("score", "left", 0);
   update("score", "right", 0);
 
-  // Reset ball & paddles
   initGame();
 
-  // Hide popup and allow game to continue
   setWinner(null);
   setIsGameOver(false);
   isGameOverRef.current = false;
@@ -114,7 +110,7 @@ export default function GameCanvas() {
         leftPaddleRef.current.draw(ctx);
         rightPaddleRef.current.draw(ctx);
 
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "#6d00cc";
         ctx.font = "30px sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(`${settings.score.left} : ${settings.score.right}`, settings.canvas.width / 2, 50);
@@ -128,11 +124,10 @@ export default function GameCanvas() {
         ref={canvasRef}
         width={getSettings().canvas.width}
         height={getSettings().canvas.height}
-        style={{ background: "black", display: "block", margin: "0 auto" }}
       />
 
       <Popup isOpen={isGameOver}>
-        <div style={{ textAlign: "center" }}>
+        <div>
           <div style={{ color: "yellow", fontSize: "30px", marginBottom: "20px" }}>
             {winner} Player Wins!
           </div>

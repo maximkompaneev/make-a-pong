@@ -11,8 +11,17 @@ export function checkPaddleCollision(ball: Ball, paddle: Paddle, settings: any) 
     ball.position.y - settings.ball.radius < paddle.position.y + settings.paddle.height;
 
   if (withinX && withinY) {
-    ball.velocity.x *= -1;
-    const hitPos = ball.position.y - (paddle.position.y + settings.paddle.height / 2);
-    ball.velocity.y += hitPos * 0.05;
+    const relativeIntersectY =
+      (paddle.position.y + settings.paddle.height / 2) - ball.position.y;
+    const normalizedIntersectY = relativeIntersectY / (settings.paddle.height / 2);
+
+    const maxBounceAngle = (Math.PI / 180) * 60;
+    const speed = Math.sqrt(ball.velocity.x ** 2 + ball.velocity.y ** 2);
+    const bounceAngle = normalizedIntersectY * maxBounceAngle;
+    const paddleSide = ball.position.x < settings.canvas.width / 2 ? 1 : -1;
+
+    // Set new velocity based on bounce angle
+    ball.velocity.x = speed * Math.cos(bounceAngle) * paddleSide;
+    ball.velocity.y = -speed * Math.sin(bounceAngle);
   }
 }

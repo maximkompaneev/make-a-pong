@@ -53,7 +53,7 @@ export class Ball {
 
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.fillStyle = settings.ball.colors.main;
+      ctx.fillStyle = settings.ball.backgroundColor;
       ctx.beginPath();
       ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
       ctx.fill();
@@ -68,13 +68,13 @@ export class Ball {
     if (this.image.complete) {
       ctx.drawImage(this.image, -settings.ball.radius, -settings.ball.radius, settings.ball.radius * 2, settings.ball.radius * 2);
     } else {
-      ctx.fillStyle = settings.ball.colors.main;
+      ctx.fillStyle = settings.ball.backgroundColor;
       ctx.beginPath();
       ctx.arc(0, 0, settings.ball.radius, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    ctx.strokeStyle = settings.ball.colors.spinMarker;
+    ctx.strokeStyle = settings.ball.backgroundColor;
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(settings.ball.radius, 0);
@@ -83,13 +83,24 @@ export class Ball {
     ctx.restore();
   }
 
-  reset(settings: any) {
-    this.position = { x: settings.canvas.width / 2, y: settings.canvas.height / 2 };
-    this.velocity = { x: settings.ball.speed, y: settings.ball.speed };
-    this.rotation = 0;
-    this.angularVelocity = 0;
-    this.trail = [];
-  }
+ reset(settings: any) {
+  this.position = { x: settings.canvas.width / 2, y: settings.canvas.height / 2 };
+  this.rotation = 0;
+  this.angularVelocity = 0;
+  this.trail = [];
+
+  const angleRange = Math.PI / 4; // 45 degrees
+  const angle = (Math.random() * 2 - 1) * angleRange;
+
+  const direction = Math.random() < 0.5 ? 1 : -1;
+
+  const speed = settings.ball.speed;
+  this.velocity = {
+    x: Math.cos(angle) * speed * direction,
+    y: Math.sin(angle) * speed
+  };
+}
+
 
   clamp(val: number, min: number, max: number) {
     return Math.max(min, Math.min(max, val));
