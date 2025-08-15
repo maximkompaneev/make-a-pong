@@ -10,6 +10,7 @@ export class Paddle {
 
   move(dy: number, delta: number) {
     const { settings } = useGameSettings.getState();
+
     const nextY = this.position.y + dy * settings.paddle.speed * delta;
     this.position.y = Math.max(0, Math.min(settings.canvas.height - settings.paddle.height, nextY));
   }
