@@ -17,7 +17,7 @@ export class Paddle {
 
   draw(ctx: CanvasRenderingContext2D) {
     const { settings } = useGameSettings.getState();
-    ctx.fillStyle = "white";
+    ctx.fillStyle = settings.paddle.backgroundColor;
     ctx.fillRect(this.position.x, this.position.y, settings.paddle.width, settings.paddle.height);
   }
 }

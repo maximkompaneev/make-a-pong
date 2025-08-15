@@ -1,0 +1,17 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(121% 174.48% at 109.92% 49.64%, #faf5ef 0, #f024f6 34.5%, #9a08f9 63%, #8200fa 100%);
+}
+
+canvas {
+    max-width: 100%;
+    background-color: white;
+}
+
+html {
+    overflow-y: hidden;
+    max-height: 99vh;
+}
