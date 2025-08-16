@@ -6,7 +6,8 @@ export default function App() {
       <h1 style={{ color: "white" }}>Make-a-pong</h1>
       <div className="description">
         <p style={{ color: "white", fontSize: "16px" }}>
-          Use the left paddle (w/s) to play against the right paddle (↑/↓).
+          Use mouse position or touch to control left paddle <br />
+          Right paddle is AI controlled
         </p>
       </div>
       <GameCanvas />
