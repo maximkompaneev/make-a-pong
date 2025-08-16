@@ -11,24 +11,10 @@ export const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        background: "rgba(0,0,0,0.7)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 1000,
-      }}
-      onClick={onClose} // optional close on outside click
+      onClick={onClose}
+      className="popup"
     >
-      <div
-        style={{ background: "#111", padding: "20px", borderRadius: "10px" }}
-        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-      >
+      <div onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>

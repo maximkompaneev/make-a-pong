@@ -22,7 +22,9 @@ const gameConfig = {
     paddleHitSpeedFactor: 1.02,        // horizontal speed increase on paddle hit
     maxSpeed: 800,                      // max allowed speed
     minHorizontalSpeed: 300,         // minimum horizontal speed to avoid stuck ball
+    speedIncreaseFactor: 0.06,         // increase speed by n% on each paddle hit
     backgroundColor: "#6d00cc"
+    
   },
   score: {
     left: 0,

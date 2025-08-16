@@ -75,7 +75,7 @@ export class Ball {
     for (let i = 0; i < this.trail.length; i++) {
       const pos = this.trail[i];
       const t = i / this.trail.length;
-      const alpha = (i + 1) / this.trail.length; // linear fade
+       const alpha = Math.pow((i + 1) / this.trail.length, 3);
       const sizeFactor = settings.ball.trailStartFactor - (settings.ball.trailStartFactor - settings.ball.trailEndFactor) * t;
 
       const radius = settings.ball.radius * sizeFactor;
