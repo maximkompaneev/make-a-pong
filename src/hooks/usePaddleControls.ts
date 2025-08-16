@@ -34,12 +34,13 @@ export function usePaddleControls(
     }, 2);
 
     const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault(); // Prevent mobile scrolling
       if (!leftPaddleRef.current || !canvasRef.current || e.touches.length === 0) return;
       updateTargetY(getCanvasY(e.touches[0].clientY));
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
