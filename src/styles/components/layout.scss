@@ -4,16 +4,17 @@ body {
     align-items: center;
     justify-content: center;
     background: radial-gradient(121% 174.48% at 109.92% 49.64%, #faf5ef 0, #f024f6 34.5%, #9a08f9 63%, #8200fa 100%);
+
+    @media (max-width: 768px) {
+        align-items: flex-start;
+        padding: 16px;
+        margin: 0;
+    }
 }
 
 canvas {
     max-width: 100%;
     background-color: white;
-}
-
-html {
-    overflow-y: hidden;
-    max-height: 99vh;
 }
 
 button {
@@ -29,42 +30,36 @@ button {
   text-transform: uppercase;
 }
 
+.description {
+    margin-block-start: 24px;
+
+    p {
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-size: 16px;
+        text-align: left;
+        margin-block-end: 24px;
+        line-height: 1.5;
+    }
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 h1 {
     color: white;
     font-size: 36px;
     text-align: center;
     margin-block-start: 0;
     margin-block-end: 24px;
-}
 
-.game-over-text {
-    color: white;
-    font-weight: bold;
-    font-size: 30px;
-    margin-block-end: 16px;
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popup > div {
-    background-color: rgb(17, 17, 17);
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-width: 360px;
-    min-height: 300px;
+    @media (max-width: 768px) {
+        margin-block-end: 12px;
+        font-size: 24px;
+    }
 }

@@ -7,7 +7,8 @@ const gameConfig = {
     width: 15,
     height: 100,
     speed: 80,
-    backgroundColor: "#6d00cc"
+    backgroundColor: "#6d00cc",
+    collisionInset: 4, // collision margin for paddle
   },
   ball: {
     radius: 20,
@@ -22,9 +23,8 @@ const gameConfig = {
     paddleHitSpeedFactor: 1.02,        // horizontal speed increase on paddle hit
     maxSpeed: 800,                      // max allowed speed
     minHorizontalSpeed: 300,         // minimum horizontal speed to avoid stuck ball
-    speedIncreaseFactor: 0.06,         // increase speed by n% on each paddle hit
+    speedIncreaseFactor: 0.08,         // increase speed by n% on each paddle hit
     backgroundColor: "#6d00cc"
-    
   },
   score: {
     left: 0,

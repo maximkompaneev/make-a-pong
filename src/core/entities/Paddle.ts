@@ -1,5 +1,17 @@
-import { useGameSettings } from "../../stores/gameSettingsStore";
-import { Vec2 } from "./Ball";
+import gameConfig from "../../config/gameConfig";
+import type { Vec2 } from "./Ball";
+
+type PaddleSettings = {
+  canvas: { width: number; height: number };
+  paddle: {
+    width: number;
+    height: number;
+    speed: number;
+    backgroundColor: string;
+  };
+};
+
+const settings = gameConfig as PaddleSettings;
 
 export class Paddle {
   position: Vec2;
@@ -8,36 +20,29 @@ export class Paddle {
     this.position = { ...position };
   }
 
-  // Method to set the position of the paddle
-  setPosition(newPosition: Vec2) {
-    const { settings } = useGameSettings.getState();
-
-    // Ensure the new position is within the canvas bounds
+  setPosition(newPosition: Vec2, cfg: PaddleSettings = settings) {
     this.position.x = newPosition.x;
     this.position.y = Math.max(
       0,
-      Math.min(settings.canvas.height - settings.paddle.height, newPosition.y)
+      Math.min(cfg.canvas.height - cfg.paddle.height, newPosition.y)
     );
   }
 
-  move(dy: number, delta: number) {
-    const { settings } = useGameSettings.getState();
-
-    const nextY = this.position.y + dy * settings.paddle.speed * delta;
+  move(dy: number, delta: number, cfg: PaddleSettings = settings) {
+    const nextY = this.position.y + dy * cfg.paddle.speed * delta;
     this.position.y = Math.max(
       0,
-      Math.min(settings.canvas.height - settings.paddle.height, nextY)
+      Math.min(cfg.canvas.height - cfg.paddle.height, nextY)
     );
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
-    const { settings } = useGameSettings.getState();
-    ctx.fillStyle = settings.paddle.backgroundColor;
+  draw(ctx: CanvasRenderingContext2D, cfg: PaddleSettings = settings) {
+    ctx.fillStyle = cfg.paddle.backgroundColor;
     ctx.fillRect(
       this.position.x,
       this.position.y,
-      settings.paddle.width,
-      settings.paddle.height
+      cfg.paddle.width,
+      cfg.paddle.height
     );
   }
 }

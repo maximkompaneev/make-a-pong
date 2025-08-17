@@ -2,15 +2,17 @@ import GameCanvas from "./components/GameCanvas/GameCanvas";
 
 export default function App() {
   return (
-    <div style={{ textAlign: "center", padding: 20 }}>
-      <h1 style={{ color: "white" }}>Make-a-pong</h1>
+    <div>
+      <h1>Make-a-pong</h1>
+      <GameCanvas />
       <div className="description">
-        <p style={{ color: "white", fontSize: "16px" }}>
-          Use mouse position or touch to control left paddle <br />
-          Right paddle is AI controlled
+        <p>
+          Control with mouse / touch <br/>
+          Life restored every few hits  <br/>
+          Streak = bonus points! <br/>
+          Harder modes = bigger rewards <br />
         </p>
       </div>
-      <GameCanvas />
     </div>
   );
 }
