@@ -18,13 +18,16 @@ export function useAIPaddle(
 ) {
   const pauseLeftRef = useRef(0);
   const idlePhaseRef = useRef(Math.random() * Math.PI * 2);
+  const approachNoiseRef = useRef(0);
+  const wasTrackingRef = useRef(false);
 
   const P = AIDifficulty[difficulty];
 
   const clampTop = (y: number) =>
     Math.max(0, Math.min(settings.canvas.height - settings.paddle.height, y));
 
-  const expEase = (gain: number, dt: number) => 1 - Math.pow(1 - gain, dt * 60);
+  const expEase = (gain: number, dt: number) =>
+    1 - Math.pow(1 - gain, dt * 60);
 
   function idle(dt: number, paddle: Paddle) {
     idlePhaseRef.current += (2 * Math.PI * dt) / P.idlePeriod;
@@ -40,14 +43,25 @@ export function useAIPaddle(
     const paddle = rightPaddleRef.current;
     const ball = ballRef.current;
 
-    if (!paddle) return;  // guard: no paddle yet
-    if (!ball) { // guard: idle
+    if (!paddle) return;
+    if (!ball) {
+      wasTrackingRef.current = false;
       idle(dt, paddle);
       return;
     }
 
     const gate = (P as any).trackingGateX ?? 0.5;
     const tracking = ball.position.x > settings.canvas.width * gate && ball.velocity.x > 0;
+
+    // sample noise ONCE when we start tracking; reset when we stop
+    if (tracking && !wasTrackingRef.current) {
+      approachNoiseRef.current =
+        (Math.random() - 0.5) * 2 * ((P.noise ?? 0) * settings.paddle.height);
+    }
+    if (!tracking && wasTrackingRef.current) {
+      approachNoiseRef.current = 0;
+    }
+    wasTrackingRef.current = tracking;
 
     if (pauseLeftRef.current > 0) {
       pauseLeftRef.current--;
@@ -65,8 +79,7 @@ export function useAIPaddle(
     }
 
     const look = (P.lookAheadMs / 1000) * ball.velocity.y;
-    const noise = (Math.random() - 0.5) * 2 * (P.noise * settings.paddle.height);
-    const targetCenterY = ball.position.y + look + noise;
+    const targetCenterY = ball.position.y + look + approachNoiseRef.current;
 
     const desiredTop = clampTop(targetCenterY - settings.paddle.height / 2);
     const t = expEase(P.follow, dt);
@@ -75,6 +88,7 @@ export function useAIPaddle(
     const maxV = P.maxSpeedFactor * settings.paddle.height;
     const maxStep = maxV * dt;
     const dead = (P as any).aimDeadzonePx ?? 0;
+
     const delta = smoothTop - paddle.position.y;
     if (Math.abs(delta) < dead) return;
 
