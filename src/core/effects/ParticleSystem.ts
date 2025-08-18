@@ -1,4 +1,3 @@
-// core/effects/ParticleSystem.ts
 import { Particle } from "./Particle";
 
 export class ParticleSystem {

@@ -1,4 +1,3 @@
-// components/GameCanvas.tsx
 import { useRef, useEffect } from "react";
 import gameConfig from "../../config/gameConfig";
 import { Ball } from "../../core/entities/Ball";
@@ -123,7 +122,7 @@ export default function GameCanvas() {
   useEffect(() => {
     handleReset();
     return gameLoop(update, render);
-  }, [difficulty]); // changing difficulty restarts loop
+  }, [difficulty]);
 
   return (
     <>
