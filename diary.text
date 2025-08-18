@@ -1,0 +1,22 @@
+Kind-of-a-dev-diary 
+
+Initial thoughts after recieving assignment - I want to implement as much as I can from the task, but also i dont want to overdo it (which i probably did) and mostly i want to have a little bit of fun and experiment
+
+Tech stack and tools I was gonna use was heavily biased towards what I heard from the interview: 
+1) React + TS (even thought tbh at current project I dont use TS, just React with JS, so some of my classes / setup might look a bit weird - I didnt use it for a long time and dont remmember best practices)
+2) Zustand for store (which i actually removed completely later on as i thought store is not really needed here and just react simple react context was more than enough)
+3) SASS for the very little css I used (color pallete / overall design I tried to aim for make-ish style and I didnt want to use any libs whatsoever as the UI is pretty simple)
+4) Vitest for local dev + testing possibilities in future
+5) Vercel + Github (never used Vercel it, but was suggested by the task, so why not)
+
+6*) Jest for future testing - nice to have feature, not implemented
+7*) Upstash with Redis - for leaderboard (not implemented, run out of time)
+
+I am more or less sufficient in react / canvas, so there is the 'list of discovery' for me:
+1) how to 'make' some basic physics for the game
+2) how to 'make' some basic ai
+3) cleanup and 'modulasation' when ideas fly to fast :D
+
+This were the main points where i used help of  LLM - basically i knew how to create gameloop or basic movement, but to make it more fun and interactive - thats where the help was needed (as well as for the cleanup)
+
+Overall it was very fun asignment to work on - I had some fun and enjoyed the process while still not spending too much time on (it was done over one weekend as well as 100km cycling trip and walks with my dog)
